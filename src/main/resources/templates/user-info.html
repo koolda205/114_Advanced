@@ -26,7 +26,7 @@
         <div class="row">
             <div class="p-0 col-2">
                 <div class="nav flex-column nav-pills pt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="nav-link" href="/admin" sec:authorize="hasAuthority('ADMIN')" role="tab"
+                    <a class="nav-link" href="/users" sec:authorize="hasAuthority('ADMIN')" role="tab"
                        aria-controls="v-pills-home" aria-selected="true">Admin</a>
                     <a class="nav-link active" href="/user-info" sec:authorize="(hasAnyAuthority('ADMIN', 'USER'))"
                        role="tab"

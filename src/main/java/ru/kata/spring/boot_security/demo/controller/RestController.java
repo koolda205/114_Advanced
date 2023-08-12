@@ -14,7 +14,7 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 import javax.validation.Valid;
 
 @Controller
-//@RequestMapping("/")
+@RequestMapping("/")
 public class RestController {
 
     private final UserService userService;
@@ -28,7 +28,7 @@ public class RestController {
         this.userValidator = userValidator;
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/users")
     public String showAdminPage(@AuthenticationPrincipal User user, Model model) {
 
         model.addAttribute("users", userService.getAllUsers());
@@ -59,7 +59,7 @@ public class RestController {
 
         userService.saveUser(user);
 
-        return "redirect:/admin";
+        return "redirect:/users";
     }
 
     @GetMapping("/findUsersById{id}")
@@ -83,7 +83,7 @@ public class RestController {
         }
         userService.updateUser(id, user);
 
-        return "redirect:/admin";
+        return "redirect:/users";
     }
 
     @DeleteMapping("/delete/{id}")
@@ -91,7 +91,7 @@ public class RestController {
 
         userService.deleteUser(id);
 
-        return "redirect:/admin";
+        return "redirect:/users";
     }
 
     @GetMapping("/error-page")
