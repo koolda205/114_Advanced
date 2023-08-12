@@ -14,14 +14,15 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 import javax.validation.Valid;
 
 @Controller
-public class AdminController {
+@RequestMapping("/")
+public class RestController {
 
     private final UserService userService;
     private final RoleService roleService;
     private final UserValidator userValidator;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService, UserValidator userValidator) {
+    public RestController(UserService userService, RoleService roleService, UserValidator userValidator) {
         this.userService = userService;
         this.roleService = roleService;
         this.userValidator = userValidator;
@@ -100,6 +101,12 @@ public class AdminController {
         model.addAttribute("user", user);
 
         return "error-page";
+    }
+
+    @GetMapping("/user-info")
+    public String showUserInfo(@AuthenticationPrincipal User user, Model model) {
+        model.addAttribute("user", user);
+        return "user-info";
     }
 
 }
