@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
@@ -29,13 +30,11 @@ public class RestController {
     }
 
     @GetMapping("/users")
-    public String showAdminPage(@AuthenticationPrincipal User user, Model model) {
+    public List<User> showAllUsers() {
 
-        model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("user", user);
+        List<User> allUsers = userService.getAllUsers();
 
-        return "admin";
+        return allUsers;
     }
 
     @GetMapping("/new")
