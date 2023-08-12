@@ -14,7 +14,7 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/")
+//@RequestMapping("/")
 public class RestController {
 
     private final UserService userService;
