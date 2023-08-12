@@ -30,11 +30,12 @@ public class RestController {
     }
 
     @GetMapping("/users")
-    public List<User> showAllUsers() {
+    public String showAllUsers() {
 
         List<User> allUsers = userService.getAllUsers();
+        allUsers.toArray().toString();
 
-        return allUsers;
+        return "allUsers";
     }
 
     @GetMapping("/new")
