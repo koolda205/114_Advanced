@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -14,32 +13,29 @@ import ru.kata.spring.boot_security.demo.util.UserValidator;
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
-@RequestMapping("/api")
-public class RestController {
+@RestController
+@RequestMapping("/users")
+public class MyRestController {
 
     private final UserService userService;
     private final RoleService roleService;
     private final UserValidator userValidator;
 
     @Autowired
-    public RestController(UserService userService, RoleService roleService, UserValidator userValidator) {
+    public MyRestController(UserService userService, RoleService roleService, UserValidator userValidator) {
         this.userService = userService;
         this.roleService = roleService;
         this.userValidator = userValidator;
     }
 
-    @ResponseBody
-    @GetMapping("/users")
-    public String showAllUsers(@AuthenticationPrincipal User user, Model model) {
+    @GetMapping()
+    public List<User> getUser() {
+        return userService.getAllUsers();
+    }
 
-        model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("user", userService.getAllUsers());
-
-//        List<User> allUsers = userService.getAllUsers();
-//        allUsers.toArray().toString();
-
-        return "allUsers";
+    @GetMapping("/{id}")
+    public User findUsersById(@PathVariable("id") Long id) {
+        return userService.getUserById(id);
     }
 
     @ResponseBody
@@ -51,6 +47,7 @@ public class RestController {
         model.addAttribute("user", user);
         return "new";
     }
+
 
     @ResponseBody
     @PostMapping("/addNewUser")
@@ -66,16 +63,6 @@ public class RestController {
         userService.saveUser(user);
 
         return "redirect:/users";
-    }
-
-    @ResponseBody
-    @GetMapping("/findUsersById{id}")
-    public String findUsersById(@PathVariable("id") Long id,
-                                Model model) {
-
-        model.addAttribute("user", userService.getUserById(id));
-
-        return "user-info";
     }
 
     @ResponseBody
