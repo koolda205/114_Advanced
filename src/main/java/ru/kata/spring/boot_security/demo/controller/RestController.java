@@ -30,10 +30,13 @@ public class RestController {
     }
 
     @GetMapping("/users")
-    public String showAllUsers() {
+    public String showAllUsers(@AuthenticationPrincipal User user, Model model) {
 
-        List<User> allUsers = userService.getAllUsers();
-        allUsers.toArray().toString();
+        model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("user", userService.getAllUsers());
+
+//        List<User> allUsers = userService.getAllUsers();
+//        allUsers.toArray().toString();
 
         return "allUsers";
     }
