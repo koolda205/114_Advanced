@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/api")
 public class RestController {
 
     private final UserService userService;
@@ -29,6 +29,7 @@ public class RestController {
         this.userValidator = userValidator;
     }
 
+    @ResponseBody
     @GetMapping("/users")
     public String showAllUsers(@AuthenticationPrincipal User user, Model model) {
 
@@ -41,6 +42,7 @@ public class RestController {
         return "allUsers";
     }
 
+    @ResponseBody
     @GetMapping("/new")
     public String newUser(@AuthenticationPrincipal User user, Model model) {
 
@@ -50,6 +52,7 @@ public class RestController {
         return "new";
     }
 
+    @ResponseBody
     @PostMapping("/addNewUser")
     public String saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult) {
@@ -65,6 +68,7 @@ public class RestController {
         return "redirect:/users";
     }
 
+    @ResponseBody
     @GetMapping("/findUsersById{id}")
     public String findUsersById(@PathVariable("id") Long id,
                                 Model model) {
@@ -74,6 +78,7 @@ public class RestController {
         return "user-info";
     }
 
+    @ResponseBody
     @PatchMapping("/editUser/{id}")
     public String edit(@ModelAttribute("user") @Valid User user,
                        BindingResult bindingResult,
@@ -89,6 +94,7 @@ public class RestController {
         return "redirect:/users";
     }
 
+    @ResponseBody
     @DeleteMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
 
@@ -97,6 +103,7 @@ public class RestController {
         return "redirect:/users";
     }
 
+    @ResponseBody
     @GetMapping("/error-page")
     public String errorPage(@AuthenticationPrincipal User user, Model model) {
 
@@ -106,6 +113,7 @@ public class RestController {
         return "error-page";
     }
 
+    @ResponseBody
     @GetMapping("/user-info")
     public String showUserInfo(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user);
