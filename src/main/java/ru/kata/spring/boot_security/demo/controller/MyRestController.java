@@ -44,27 +44,6 @@ public class MyRestController {
         return userService.getUserById(id);
     }
 
-//    @PostMapping
-//    public ResponseEntity<HttpStatus> create(@RequestBody @Valid User user,
-//                                             BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) {
-//            StringBuilder errorMsg = new StringBuilder();
-//
-//            List<FieldError> errors = bindingResult.getFieldErrors();
-//            for (FieldError error : errors) {
-//                errorMsg.append(error.getField())
-//                        .append(" - ").append(error.getDefaultMessage())
-//                        .append(";");
-//            }
-//
-//            throw new UserNotCreatedException(errorMsg.toString());
-//        }
-//
-//        userService.saveUser(user);
-//
-//        return  ResponseEntity.ok(HttpStatus.OK);
-//    }
-
     @PostMapping
     public ResponseEntity<HttpStatus> saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult) {

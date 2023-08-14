@@ -54,6 +54,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void updateUser(Long id, User user) {
+        Optional<User> userFromDb = userRepository.findById(id);
+        userFromDb.orElseThrow(UserNotFoundExeption::new);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
