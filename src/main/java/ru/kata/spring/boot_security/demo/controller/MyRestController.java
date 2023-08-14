@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/users")
+@RequestMapping("/users")
 public class MyRestController {
 
     private final UserService userService;
@@ -34,7 +34,7 @@ public class MyRestController {
         this.userValidator = userValidator;
     }
 
-    @GetMapping()
+    @GetMapping
     public List<User> getUser() {
         return userService.getAllUsers();
     }
@@ -44,33 +44,55 @@ public class MyRestController {
         return userService.getUserById(id);
     }
 
+//    @PostMapping
+//    public ResponseEntity<HttpStatus> create(@RequestBody @Valid User user,
+//                                             BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) {
+//            StringBuilder errorMsg = new StringBuilder();
+//
+//            List<FieldError> errors = bindingResult.getFieldErrors();
+//            for (FieldError error : errors) {
+//                errorMsg.append(error.getField())
+//                        .append(" - ").append(error.getDefaultMessage())
+//                        .append(";");
+//            }
+//
+//            throw new UserNotCreatedException(errorMsg.toString());
+//        }
+//
+//        userService.saveUser(user);
+//
+//        return  ResponseEntity.ok(HttpStatus.OK);
+//    }
+
     @PostMapping
-    public ResponseEntity<HttpStatus> create(@RequestBody @Valid User user,
-                                             BindingResult bindingResult) {
+    public String saveUser(@ModelAttribute("user") @Valid User user,
+                           BindingResult bindingResult) {
+
         if (bindingResult.hasErrors()) {
             StringBuilder errorMsg = new StringBuilder();
+
             List<FieldError> errors = bindingResult.getFieldErrors();
             for (FieldError error : errors) {
                 errorMsg.append(error.getField())
-                        .append(" - ")
-                        .append(error.getDefaultMessage())
+                        .append(" - ").append(error.getDefaultMessage())
                         .append(";");
             }
+
             throw new UserNotCreatedException(errorMsg.toString());
         }
 
         userService.saveUser(user);
 
-        return  ResponseEntity.ok(HttpStatus.OK);
-
+        return "user added";
     }
 
     @ExceptionHandler
     private ResponseEntity<UserErrorResponse> handeExeptions(UserNotFoundExeption e){
         UserErrorResponse response = new UserErrorResponse(
                 "User with this id wasn`t found",
-                System.currentTimeMillis()
-        );
+                System.currentTimeMillis());
+
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
@@ -81,33 +103,6 @@ public class MyRestController {
                 System.currentTimeMillis()
         );
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    @ResponseBody
-    @GetMapping("/new")
-    public String newUser(@AuthenticationPrincipal User user, Model model) {
-
-        model.addAttribute("users", new User());
-        model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("user", user);
-        return "new";
-    }
-
-
-    @ResponseBody
-    @PostMapping("/addNewUser")
-    public String saveUser(@ModelAttribute("user") @Valid User user,
-                           BindingResult bindingResult) {
-
-        userValidator.validate(user, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "error-page";
-        }
-
-        userService.saveUser(user);
-
-        return "redirect:/users";
     }
 
     @ResponseBody
