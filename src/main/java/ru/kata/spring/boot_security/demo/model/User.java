@@ -37,8 +37,9 @@ public class User implements UserDetails {
     private int age;
 
     @Column(name = "email")
+//    @Email(message = "введите в формате имя@почта.домен")
+    @Email
     @NotEmpty(message = "Поле не должно быть пустым")
-    @Email(message = "введите в формате имя@почта.домен")
     private String email;
 
     @Column(name = "password")
