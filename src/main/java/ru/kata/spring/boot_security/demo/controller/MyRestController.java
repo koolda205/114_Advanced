@@ -95,6 +95,29 @@ public class MyRestController {
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<HttpStatus> edit(@ModelAttribute("user") @Valid User user,
+                       BindingResult bindingResult,
+                       @PathVariable("id") Long id) {
+
+        if (bindingResult.hasErrors()) {
+            StringBuilder errorMsg = new StringBuilder();
+
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors) {
+                errorMsg.append(error.getField())
+                        .append(" - ").append(error.getDefaultMessage())
+                        .append(";");
+            }
+
+            throw new UserNotCreatedException(errorMsg.toString());
+        }
+
+        userService.updateUser(id, user);
+
+        return  ResponseEntity.ok(HttpStatus.OK);
+    }
+
     @ExceptionHandler
     private ResponseEntity<UserErrorResponse> handeExeptions(UserNotFoundExeption e){
         UserErrorResponse response = new UserErrorResponse(
@@ -113,20 +136,5 @@ public class MyRestController {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-    @ResponseBody
-    @PatchMapping("/editUser/{id}")
-    public String edit(@ModelAttribute("user") @Valid User user,
-                       BindingResult bindingResult,
-                       @PathVariable("id") Long id) {
-
-        userValidator.validate(user, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return "error-page";
-        }
-        userService.updateUser(id, user);
-
-        return "redirect:/users";
-    }
 
 }
