@@ -33,20 +33,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Transactional
-    public void updateUser(Long id, User user) {
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
-    }
-
-    @Override
-    @Transactional
-    public void deleteUser(long id) {
-        userRepository.deleteById(id);
-    }
-
-    @Override
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
@@ -55,6 +41,22 @@ public class UserServiceImpl implements UserService {
     public User getUserById(long id) {
         Optional<User> userFromDb = userRepository.findById(id);
         return userFromDb.orElseThrow(UserNotFoundExeption::new);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(long id) {
+        Optional<User> userFromDb = userRepository.findById(id);
+        userFromDb.orElseThrow(UserNotFoundExeption::new);
+        userRepository.deleteById(id);
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(Long id, User user) {
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     @Override
