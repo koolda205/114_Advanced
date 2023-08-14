@@ -87,6 +87,12 @@ public class MyRestController {
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+
+        userService.deleteUser(id);
+    }
+
     @ExceptionHandler
     private ResponseEntity<UserErrorResponse> handeExeptions(UserNotFoundExeption e){
         UserErrorResponse response = new UserErrorResponse(
@@ -119,32 +125,6 @@ public class MyRestController {
         userService.updateUser(id, user);
 
         return "redirect:/users";
-    }
-
-    @ResponseBody
-    @DeleteMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-
-        userService.deleteUser(id);
-
-        return "redirect:/users";
-    }
-
-    @ResponseBody
-    @GetMapping("/error-page")
-    public String errorPage(@AuthenticationPrincipal User user, Model model) {
-
-        model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("user", user);
-
-        return "error-page";
-    }
-
-    @ResponseBody
-    @GetMapping("/user-info")
-    public String showUserInfo(@AuthenticationPrincipal User user, Model model) {
-        model.addAttribute("user", user);
-        return "user-info";
     }
 
 }
