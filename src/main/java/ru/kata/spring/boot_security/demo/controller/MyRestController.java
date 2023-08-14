@@ -66,7 +66,7 @@ public class MyRestController {
 //    }
 
     @PostMapping
-    public String saveUser(@ModelAttribute("user") @Valid User user,
+    public ResponseEntity<HttpStatus> saveUser(@ModelAttribute("user") @Valid User user,
                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
@@ -84,7 +84,7 @@ public class MyRestController {
 
         userService.saveUser(user);
 
-        return "user added";
+        return  ResponseEntity.ok(HttpStatus.OK);
     }
 
     @ExceptionHandler
