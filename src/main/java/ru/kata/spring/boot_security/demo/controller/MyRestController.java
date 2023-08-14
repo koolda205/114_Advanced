@@ -1,6 +1,8 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
+import ru.kata.spring.boot_security.demo.util.UserErrorResponse;
+import ru.kata.spring.boot_security.demo.util.UserNotFoundExeption;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
@@ -38,6 +42,14 @@ public class MyRestController {
         return userService.getUserById(id);
     }
 
+    @ExceptionHandler
+    private ResponseEntity<UserErrorResponse> handeExeptions(UserNotFoundExeption e){
+        UserErrorResponse response = new UserErrorResponse(
+                "User with this id wasn`t found",
+                System.currentTimeMillis()
+        );
+        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
     @ResponseBody
     @GetMapping("/new")
     public String newUser(@AuthenticationPrincipal User user, Model model) {
