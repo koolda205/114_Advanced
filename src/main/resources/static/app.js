@@ -28,10 +28,9 @@ const display = (users) => {
                         <td>${user.surname}</td>
                         <td>${user.age}</td>
                         <td>${user.email}</td>
-                        <td>${user.password}</td>
                         <td>${user.role}</td>
-                        <td class="text center"><a class="btnEdit btn btn-primary">Edit<a/>
-                        <a class="btnDelete btn btn-danger">Delete<a/></td>
+                        <td class="text center"><a class="btnEdit btn btn-primary">Edit<a/></td>
+                        <td class="text center"><a class="btnDelete btn btn-danger">Delete<a/></td>
                     </tr>
                     `
     });
