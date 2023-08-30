@@ -39,6 +39,6 @@ const display = (users) => {
 }
 
 fetch(url)
-    .then(response => response.json)
+    .then(response => response.json())
     .then(data => display(data))
     .catch(error => console.log(error))
