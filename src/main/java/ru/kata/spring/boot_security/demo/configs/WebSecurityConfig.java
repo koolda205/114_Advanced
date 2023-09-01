@@ -31,25 +31,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .formLogin()
-                .successHandler(successUserHandler)
-                .loginProcessingUrl("/login")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .permitAll()
-                .and()
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/login").anonymous()
-                .antMatchers("/").access("hasAnyAuthority('ADMIN', 'USER')")
+//                .antMatchers("/login").permitAll()
+                .antMatchers("/**").permitAll() // чтобы через Postman смотреть
+                .antMatchers("/index/**").access("hasAnyAuthority('ADMIN')")
+                .antMatchers("/users/**").access("hasAnyAuthority('ADMIN', 'USER')")
                 .anyRequest()
                 .authenticated()
                 .and()
+                .formLogin().successHandler(successUserHandler)
+                .permitAll()
+                .and()
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST"))
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .deleteCookies("JSESSIONID")
                 .logoutSuccessUrl("/login")
-                .and().csrf().disable();
+                .permitAll();
     }
-
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

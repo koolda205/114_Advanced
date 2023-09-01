@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class RestUserController {
+public class AdminRestUserController {
 
     private final UserService userService;
     private final RoleService roleService;
@@ -36,7 +36,7 @@ public class RestUserController {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public RestUserController(UserService userService, RoleService roleService, UserValidator userValidator, ModelMapper modelMapper) {
+    public AdminRestUserController(UserService userService, RoleService roleService, UserValidator userValidator, ModelMapper modelMapper) {
         this.userService = userService;
         this.roleService = roleService;
         this.userValidator = userValidator;
@@ -84,8 +84,8 @@ public class RestUserController {
         return  ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @PutMapping("/users")
-    public ResponseEntity<HttpStatus> editUser (@RequestBody @Valid UserDTO userDTO,
+    @PutMapping("/users/{id}")
+    public ResponseEntity<HttpStatus> editUser (@PathVariable("id") Long id, @RequestBody @Valid UserDTO userDTO,
                        BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
