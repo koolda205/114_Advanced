@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('navbar-user-email').innerText = user.email;
             document.getElementById('navbar-user-roles').innerText = user.roles.map(role => role.replace('ROLE_', '')).join(', ');
         })
-        // .catch(error => {
-        //     console.error('Ошибка:', error);
-        // });
+        .catch(error => {
+            console.error('Ошибка:', error);
+        });
 });
