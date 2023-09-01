@@ -1,39 +1,35 @@
-<!doctype html>
-<html lang="ru" xmlns:sec="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="shortcut icon" href="/templates/img/OIP-C.ico" type="image/x-icon">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
+    <link rel="stylesheet" href="../static/style.css" th:href="@{/static/style.css}" type="text/css"/>
     <title>Admin page</title>
-    <style>
-        body {
-            background: #f8f9fa;
-        }
-    </style>
 </head>
-<body>
-
-<nav class="navbar navbar-dark bg-dark">
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-dark" style="display: block; color: white">
     <div class="container-fluid">
-
-        <p class="navbar-brand">
-            <b><span id="myUserDetails" class="navbar-brand">
-      </span></b>
-        </p>
-
-
+        <span id="myUserDetails" class="navbar-brand ">
+        </span>
         <form th:action="@{/logout}" method="post">
-            <button type="submit" class="btn btn-dark text-secondary">Logout</button>
+            <input type="submit" class="btn btn-link text-white-50" value="Logout"/>
         </form>
     </div>
 </nav>
 
 
-<br/>
+<div>
+    <div class="block-left custom-col-left nav nav-pills flex-column back-white" id="v-pills-tab" role="tablist">
+        <b class="nav-link active pill" id="v-pills-admin-tab" data-bs-toggle="pill"
+           data-bs-target="#v-pills-admin" type="button" role="tab" aria-controls="v-pills-admin"
+           aria-selected="true">Admin
+        </b>
+        <b class="nav-link pill" id="v-pills-user-tab" data-bs-toggle="pill"
+           data-bs-target="#v-pills-user" type="button" role="tab" aria-controls="v-pills-user"
+           aria-selected="false" onclick="loadUserTable()">User
+        </b>
+    </div>
 
 
 <div class="container-fluid">
