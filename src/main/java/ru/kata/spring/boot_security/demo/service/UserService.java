@@ -10,7 +10,7 @@ public interface UserService {
 
     void saveUser(User user);
 
-//    void updateUser(Long id, User user);
+    void updateUser(User user);
 
     void deleteUser(long id);
 
@@ -19,4 +19,6 @@ public interface UserService {
     User getUserById(long id);
 
     Optional<User> getUserByEmail(String email);
+
+    Optional<User> findByName(String name);
 }

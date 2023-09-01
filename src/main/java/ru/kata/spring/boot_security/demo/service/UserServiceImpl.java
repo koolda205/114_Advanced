@@ -31,6 +31,20 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        Optional<User> userFromDB = userRepository.findById(user.getId());
+        String newPassword = user.getPassword();
+        String currentPassword = userFromDB.get().getPassword();
+
+        if (!currentPassword.equals(newPassword)) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+        userRepository.save(user);
+    }
+
     @Override
     @Transactional
     public void deleteUser(long id) {
@@ -50,6 +64,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserByEmail(String email) {
-        return Optional.ofNullable(userRepository.findByEmail(email));
+        return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public Optional<User> findByName(String username) {
+        return userRepository.findByName(username);
     }
 }

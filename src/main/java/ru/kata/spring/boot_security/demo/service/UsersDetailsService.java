@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
+import java.util.Optional;
+
 @Service
 public class UsersDetailsService implements UserDetailsService {
 
@@ -19,13 +21,13 @@ public class UsersDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(login);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
+        Optional<User> user = userRepository.findByEmail(username);
+
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException(String.format("User" + username + "not found"));
         }
-
-        return user;
+        return user.get();
     }
 }

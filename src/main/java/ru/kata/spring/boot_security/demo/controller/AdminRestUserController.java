@@ -101,7 +101,7 @@ public class AdminRestUserController {
             throw new UserNotCreatedException(errorMsg.toString());
         }
 
-        userService.saveUser(convertToUser(userDTO));
+        userService.updateUser(convertToUser(userDTO));
 
         return  ResponseEntity.ok(HttpStatus.OK);
     }
