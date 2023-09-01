@@ -1,3 +1,4 @@
+"use strict";
 
 const url = "http://localhost:8080/api/users"
 
@@ -156,7 +157,7 @@ async function addNewUser(event) {
             name: form_new.name.value,
             surname: form_new.surname.value,
             age: form_new.age.value,
-            username: form_new.username.value,
+            email: form_new.email.value,
             password: form_new.password.value,
             roles: listOfRole
         })
@@ -174,11 +175,12 @@ async function addNewUser(event) {
 
 const form_ed = document.getElementById('formForEditing');
 const id_ed = document.getElementById('id_ed');
-const firstName_ed = document.getElementById('firstName_ed');
-const lastName_ed = document.getElementById('lastName_ed');
+const name_ed = document.getElementById('name_ed');
+const surname_ed = document.getElementById('surname_ed');
 const age_ed = document.getElementById('age_ed');
-const username_ed = document.getElementById('username_ed');
+const email_ed = document.getElementById('email_ed');
 const password_ed = document.getElementById('password_ed');
+
 
 
 async function editModalData(id) {
@@ -188,10 +190,10 @@ async function editModalData(id) {
     if (usersPageEd.ok) {
         await usersPageEd.json().then(user => {
             id_ed.value = `${user.id}`;
-            firstName_ed.value = `${user.username}`;
-            lastName_ed.value = `${user.lastName}`;
+            name_ed.value = `${user.name}`;
+            surname_ed.value = `${user.surname}`;
             age_ed.value = `${user.age}`;
-            username_ed.value = `${user.email}`;
+            email_ed.value = `${user.email}`;
             password_ed.value = `${user.password}`;
         })
     } else {
@@ -215,10 +217,10 @@ async function editUser() {
         },
         body: JSON.stringify({
             id: form_ed.editedUserId.value,
-            firstName: form_ed.username.value,
-            lastName: form_ed.lastName.value,
+            name: form_ed.name.value,
+            surname: form_ed.surname.value,
             age: form_ed.age.value,
-            username: form_ed.email.value,
+            email: form_ed.email.value,
             password: form_ed.password.value,
             roles: listOfRole
         })
@@ -231,10 +233,10 @@ async function editUser() {
 
 const form_del = document.getElementById('formForDeleting');
 const id_del = document.getElementById('id_del');
-const firstName_del = document.getElementById(`firstName_del`);
-const lastName_del = document.getElementById('lastName_del');
+const name_del = document.getElementById(`name_del`);
+const surname_del = document.getElementById('surname_del');
 const age_del = document.getElementById('age_del');
-const username_del = document.getElementById('username_del');
+const email_del = document.getElementById('email_del');
 const password_del = document.getElementById('password_del');
 
 
@@ -245,10 +247,10 @@ async function deleteModalData(id) {
     if (usersPageDel.ok) {
         await usersPageDel.json().then(user => {
             id_del.value = `${user.id}`;
-            firstName_del.value = `${user.username}`;
-            lastName_del.value = `${user.lastName}`;
+            name_del.value = `${user.name}`;
+            surname_del.value = `${user.surname}`;
             age_del.value = `${user.age}`;
-            username_del.value = `${user.email}`;
+            email_del.value = `${user.email}`;
             password_del.value = `${user.password}`;
         })
     } else {
@@ -264,10 +266,10 @@ async function deleteUser() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            firstName: form_del.username.value,
-            lastName: form_del.lastName.value,
+            name: form_del.name.value,
+            surname: form_del.surname.value,
             age: form_del.age.value,
-            username: form_del.email.value,
+            email: form_del.email.value,
             password: form_del.password.value
         })
     }
