@@ -20,5 +20,5 @@ public interface UserService {
 
     Optional<User> getUserByEmail(String email);
 
-    User findByName(String name);
+    Optional<User> findByName(String name);
 }

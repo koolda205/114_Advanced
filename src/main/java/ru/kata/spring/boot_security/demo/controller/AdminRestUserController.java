@@ -122,7 +122,11 @@ public class AdminRestUserController {
 
 //    @GetMapping("/user")
 //    public ResponseEntity<User> getUserByUsername (Principal principal) {
-//        User user = userService.findByName(principal.getName());
+//        User user = null;
+//        Optional<User> userFromDb = userService.findByName(principal.getName());
+//        if (userFromDb.isPresent()) {
+//            user = userFromDb.get();
+//        }
 //        return new ResponseEntity<>(user,HttpStatus.OK);
 //    }
 
