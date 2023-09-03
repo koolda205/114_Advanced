@@ -1,3 +1,4 @@
+
 const url = "http://localhost:8080/api/users/"
 
 async function getAdminPage() {
@@ -32,7 +33,7 @@ async function activePillContent(tabId) {
 }
 
 async function getMyUser() {
-    let res = await fetch('/api/auth');
+    let res = await fetch("http://localhost:8080/api/auth");
     let resUser = await res.json();
     userNavbarDetails(resUser);
 }
@@ -86,7 +87,7 @@ window.addEventListener('DOMContentLoaded', loadUserTable);
 
 async function loadUserTable() {
     let tableBody = document.getElementById('tableUser');
-    let page = await fetch("/api/auth");
+    let page = await fetch("http://localhost:8080/api/auth");
     let currentUser;
     if (page.ok) {
         currentUser = await page.json();
@@ -184,7 +185,7 @@ const password_ed = document.getElementById('password_ed');
 
 async function editModalData(id) {
     $('#editModal').modal('show');
-    const urlDataEd = 'http://localhost:8080/api/users/' + id;
+    const urlDataEd = url + id;
     let usersPageEd = await fetch(urlDataEd);
     if (usersPageEd.ok) {
         await usersPageEd.json().then(user => {
@@ -201,7 +202,7 @@ async function editModalData(id) {
 }
 
 async function editUser() {
-    let urlEdit = 'http://localhost:8080/api/users/' + id_ed.value;
+    let urlEdit = url + id_ed.value;
     let listOfRole = [];
     for (let i = 0; i < form_ed.rolesForEditing.options.length; i++) {
         if (form_ed.rolesForEditing.options[i].selected) {
