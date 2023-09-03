@@ -1,5 +1,5 @@
 async function getMyUser() {
-    let res = await fetch('/api/auth');
+    let res = await fetch('/user');
     let resUser = await res.json();
     userNavbarDetails(resUser);
 }

@@ -29,17 +29,17 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/user")
-    public ModelAndView showUserInfo(@AuthenticationPrincipal User usercom) {
-        User user = userService.getUserById(usercom.getId());
-        ModelAndView modelAndView = new ModelAndView("user-info");
-        modelAndView.addObject("user", user);
-        return modelAndView;
-    }
-
-    @GetMapping(path = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<User>> getAuthUser(@CurrentSecurityContext(expression = "authentication") Principal principal) {
-        Optional<User> user = userService.findByName(principal.getName());
-        return ResponseEntity.ok(user);
-    }
+//    @GetMapping("/user")
+//    public ModelAndView showUserInfo(@AuthenticationPrincipal User authUser) {
+//        User user = userService.getUserById(authUser.getId());
+//        ModelAndView modelAndView = new ModelAndView("user-info");
+//        modelAndView.addObject("user", user);
+//        return modelAndView;
+//    }
+//
+//    @GetMapping(path = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<Optional<User>> getAuthUser(@CurrentSecurityContext(expression = "authentication") Principal principal) {
+//        Optional<User> user = userService.findByName(principal.getName());
+//        return ResponseEntity.ok(user);
+//    }
 }

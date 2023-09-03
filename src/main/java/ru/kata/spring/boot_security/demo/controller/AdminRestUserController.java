@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import ru.kata.spring.boot_security.demo.dto.UserDTO;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
@@ -22,7 +24,9 @@ import ru.kata.spring.boot_security.demo.util.UserNotCreatedException;
 import ru.kata.spring.boot_security.demo.util.UserValidator;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -115,4 +119,18 @@ public class AdminRestUserController {
 
         return modelMapper.map(user, UserDTO.class);
     }
+
+    @GetMapping("/user")
+    public ResponseEntity<User> getUserByUsername (Principal principal) {
+        User user = userService.findByName(principal.getName());
+        return new ResponseEntity<>(user,HttpStatus.OK);
+    }
+
+//    @GetMapping("/index")
+//    public ModelAndView showUserInfo(@AuthenticationPrincipal User authUser) {
+//        User user = userService.getUserById(authUser.getId());
+//        ModelAndView modelAndView = new ModelAndView("index");
+//        modelAndView.addObject("user", user);
+//        return modelAndView;
+//    }
 }

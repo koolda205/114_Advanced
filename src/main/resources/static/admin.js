@@ -1,6 +1,6 @@
 "use strict";
 
-const url = "http://localhost:8080/api/users"
+const url = "http://localhost:8080/api/users/"
 
 async function getAdminPage() {
     let page = await fetch(url);
@@ -243,7 +243,7 @@ const password_del = document.getElementById('password_del');
 
 async function deleteModalData(id) {
     $('#deleteModal').modal('show');
-    const urlForDel = 'http://localhost:8080/api/users/' + id;
+    const urlForDel = url + id;
     let usersPageDel = await fetch(urlForDel);
     if (usersPageDel.ok) {
         await usersPageDel.json().then(user => {
@@ -260,7 +260,7 @@ async function deleteModalData(id) {
 }
 
 async function deleteUser() {
-    let urlDel = 'http://localhost:8080/api/users/' + id_del.value;
+    let urlDel = url + id_del.value;
     let method = {
         method: 'DELETE',
         headers: {
