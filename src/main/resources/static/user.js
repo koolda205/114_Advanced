@@ -1,24 +1,42 @@
-document.addEventListener('DOMContentLoaded', function () {
-    fetch('/user', {
-        method: 'GET',
-        headers: {
-            'Accept': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(user => {
-            document.getElementById('user-id').innerText = user.id;
-            document.getElementById('user-name').innerText = user.name;
-            document.getElementById('user-surname').innerText = user.surname;
-            document.getElementById('user-age').innerText = user.age;
-            document.getElementById('user-email').innerText = user.email;
-            document.getElementById('user-roles').innerText = user.roles.map(role => role.replace('ROLE_', '')).join(', ');
+async function getMyUser() {
+    let res = await fetch('/api/auth');
+    let resUser = await res.json();
+    userNavbarDetails(resUser);
+}
 
-            // Заполняем данные в navbar
-            document.getElementById('navbar-user-email').innerText = user.email;
-            document.getElementById('navbar-user-roles').innerText = user.roles.map(role => role.replace('ROLE_', '')).join(', ');
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-        });
-});
+window.addEventListener('DOMContentLoaded', getMyUser);
+
+function userNavbarDetails(resUser) {
+    let userList = document.getElementById('myUserDetails');
+    let roles = ''
+    for (let role of resUser.roles) {
+        roles += role.name + ' '
+    }
+    userList.insertAdjacentHTML('beforeend', `
+        <b> ${resUser.name} </b> with roles: <a>${roles} </a>`);
+
+}
+window.addEventListener('DOMContentLoaded', loadUserTable);
+async function loadUserTable() {
+    let tableBody = document.getElementById('tableUser');
+    let page = await fetch("/api/auth");
+    let currentUser;
+    if (page.ok) {
+        currentUser = await page.json();
+    } else {
+        alert(`Error, ${page.status}`)
+    }
+    let dataHtml = '';
+    let roles = [];
+    for (let role of currentUser.roles) {
+        roles.push(" " + role.name)
+    }
+    dataHtml +=
+        `<tr>
+    <td>${currentUser.id}</td>
+    <td>${currentUser.name}</td>
+    <td>${currentUser.email}</td>
+    <td>${roles}</td>
+</tr>`
+    tableBody.innerHTML = dataHtml;
+}

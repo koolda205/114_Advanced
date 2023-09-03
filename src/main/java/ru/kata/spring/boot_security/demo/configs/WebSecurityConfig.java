@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login").permitAll()
 //                .antMatchers("/**").permitAll() // чтобы через Postman смотреть
                 .antMatchers("/index/**").access("hasAnyAuthority('ADMIN')")
-                .antMatchers("/users/**").access("hasAnyAuthority('ADMIN', 'USER')")
+                .antMatchers("/user/**").access("hasAnyAuthority('ADMIN', 'USER')")
                 .anyRequest()
                 .authenticated()
                 .and()

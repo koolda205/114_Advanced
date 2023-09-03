@@ -173,6 +173,7 @@ async function addNewUser(event) {
     });
 }
 
+
 const form_ed = document.getElementById('formForEditing');
 const id_ed = document.getElementById('id_ed');
 const name_ed = document.getElementById('name_ed');
