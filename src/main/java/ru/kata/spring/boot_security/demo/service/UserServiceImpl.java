@@ -58,8 +58,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(long id) {
+        User user = null;
         Optional<User> userFromDb = userRepository.findById(id);
-        return userFromDb.orElse(new User());
+        if (userFromDb.isPresent()) {
+            user = userFromDb.get();
+        }
+        return user;
     }
 
     @Override
@@ -68,7 +72,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByName(String username) {
-        return userRepository.findByName(username);
+    public User findByName(String name) {
+        User user = null;
+        Optional<User> userFromDb = userRepository.findByName(name);
+        if(userFromDb.isPresent()) {
+            user = userFromDb.get();
+        }
+        return user;
     }
 }
+

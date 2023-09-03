@@ -7,15 +7,16 @@
     <link rel="stylesheet" href="../static/style.css" th:href="@{/static/style.css}" type="text/css"/>
     <title>Admin page</title>
 </head>
-<body class="bg-light">
-<nav class="navbar navbar-dark bg-dark" style="display: block; color: white">
-    <div class="container-fluid">
-        <span id="myUserDetails" class="navbar-brand ">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+    <div class="nav justify-content-left">
+        <span class="navbar-text" id="info">
         </span>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" class="btn btn-link text-white-50" value="Logout"/>
-        </form>
     </div>
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{'/logout'}" style="color: #a2a2a2">Logout</a>
+        </li>
+    </ul>
 </nav>
 
 <div>
@@ -228,11 +229,6 @@
                         <label for="email_del" class="col-form-label">Email</label>
                         <input id="email_del" type="email" readonly="readonly" class="form-control"
                                name="email">
-                    </div>
-                    <div class="form-group mt-4">
-                        <label for="password_del" class="col-form-label">Password</label>
-                        <input id="password_del" type="text" readonly="readonly" class="form-control"
-                               name="password">
                     </div>
                 </form>
             </div>

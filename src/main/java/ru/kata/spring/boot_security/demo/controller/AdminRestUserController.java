@@ -120,11 +120,11 @@ public class AdminRestUserController {
         return modelMapper.map(user, UserDTO.class);
     }
 
-    @GetMapping("/user")
-    public ResponseEntity<User> getUserByUsername (Principal principal) {
-        User user = userService.findByName(principal.getName());
-        return new ResponseEntity<>(user,HttpStatus.OK);
-    }
+//    @GetMapping("/user")
+//    public ResponseEntity<User> getUserByUsername (Principal principal) {
+//        User user = userService.findByName(principal.getName());
+//        return new ResponseEntity<>(user,HttpStatus.OK);
+//    }
 
 //    @GetMapping("/index")
 //    public ModelAndView showUserInfo(@AuthenticationPrincipal User authUser) {

@@ -1,5 +1,3 @@
-"use strict";
-
 const url = "http://localhost:8080/api/users/"
 
 async function getAdminPage() {
@@ -238,7 +236,6 @@ const name_del = document.getElementById(`name_del`);
 const surname_del = document.getElementById('surname_del');
 const age_del = document.getElementById('age_del');
 const email_del = document.getElementById('email_del');
-const password_del = document.getElementById('password_del');
 
 
 async function deleteModalData(id) {
@@ -252,7 +249,6 @@ async function deleteModalData(id) {
             surname_del.value = `${user.surname}`;
             age_del.value = `${user.age}`;
             email_del.value = `${user.email}`;
-            password_del.value = `${user.password}`;
         })
     } else {
         alert(`Error, ${usersPageDel.status}`)
@@ -271,7 +267,6 @@ async function deleteUser() {
             surname: form_del.surname.value,
             age: form_del.age.value,
             email: form_del.email.value,
-            password: form_del.password.value
         })
     }
     await fetch(urlDel, method).then(() => {
