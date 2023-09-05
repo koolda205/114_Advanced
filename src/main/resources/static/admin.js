@@ -267,12 +267,12 @@ async function deleteUser() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            username: form_new.username.value,
-            surname: form_new.surname.value,
-            age: form_new.age.value,
-            email: form_new.email.value,
-            password: form_new.password.value,
-            roles: listOfRole
+            username: form_del.username.value,
+            surname: form_del.surname.value,
+            age: form_del.age.value,
+            email: form_del.email.value,
+            password: form_del.password.value,
+            roles: form_del.role.value
         })
     }
     await fetch(urlDel, method).then(() => {
