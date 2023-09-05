@@ -35,6 +35,8 @@ window.addEventListener('DOMContentLoaded', loadUserTable);
             `<tr>
     <td>${currentUser.id}</td>
     <td>${currentUser.username}</td>
+    <td>${currentUser.surname}</td>
+    <td>${currentUser.age}</td>
     <td>${currentUser.email}</td>
     <td>${roles}</td>
 </tr>`

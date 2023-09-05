@@ -60,7 +60,9 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">UserName</th>
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Age</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Role</th>
                                     <th scope="col">Edit</th>
@@ -82,8 +84,16 @@
                         <div class="card-body d-flex justify-content-center text-center">
                             <form id="formForNewUser">
                                 <div class="form-group">
-                                    <label for="username" class="col-form-label">UserName</label>
+                                    <label for="username" class="col-form-label">First Name</label>
                                     <input id="username" type="text" class="form-control" name="username">
+                                </div>
+                                <div class="form-group">
+                                    <label for="surname" class="col-form-label">Last Name</label>
+                                    <input id="surname" type="text" class="form-control" name="surname">
+                                </div>
+                                <div class="form-group">
+                                    <label for="age" class="col-form-label">Age</label>
+                                    <input id="age" type="number" class="form-control" name="age">
                                 </div>
                                 <div class="form-group mt-4">
                                     <label for="email" class="col-form-label">Email</label>
@@ -98,7 +108,6 @@
                                            for="roleSelect">Role</label>
                                     <select multiple class="form-control" size="2" id="roleSelect"
                                             name="roles">
-
                                         <option id="roleNewUser" value="2">USER</option>
                                         <option id="roleNewAdmin" value="1">ADMIN</option>
                                     </select>
@@ -123,7 +132,9 @@
                         <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">UserName</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Age</th>
                             <th scope="col">Email</th>
                             <th scope="col">Role</th>
                         </tr>
@@ -152,6 +163,14 @@
                     <div class="form-group mt-4">
                         <label for="username_ed" class="col-form-label">UserName</label>
                         <input id="username_ed" type="text" class="form-control" name="username">
+                    </div>
+                    <div class="form-group mt-4">
+                        <label for="surname_ed" class="col-form-label">UserName</label>
+                        <input id="surname_ed" type="text" class="form-control" name="surname">
+                    </div>
+                    <div class="form-group mt-4">
+                        <label for="age_ed" class="col-form-label">UserName</label>
+                        <input id="age_ed" type="number" class="form-control" name="age">
                     </div>
                     <div class="form-group mt-4">
                         <label for="email_ed" class="col-form-label">Email</label>
@@ -196,6 +215,10 @@
                         <input id="username_del" type="text" readonly="readonly" class="form-control" name="username">
                     </div>
                     <div class="form-group mt-4">
+                        <label for="surname_del" class="col-form-label">UserName</label>
+                        <input id="surname_del" type="text" readonly="readonly" class="form-control" name="surname">
+                    </div>
+                    <div class="form-group mt-4">
                         <label for="email_del" class="col-form-label">Email</label>
                         <input id="email_del" type="email" readonly="readonly" class="form-control"
                                name="email">
@@ -204,6 +227,13 @@
                         <label for="password_del" class="col-form-label">Password</label>
                         <input id="password_del" type="text" readonly="readonly" class="form-control"
                                name="password">
+                    </div>
+                    <div>
+                        <label class="mt-4" for="rolesForDeleting">Role</label>
+                        <select multiple class="form-control" size="2" id="rolesForDeleting" name="roles" readonly="readonly">
+                            <option id="roleUser_del" value="2">USER</option>
+                            <option id="roleAdmin_del" value="1">ADMIN</option>
+                        </select>
                     </div>
                 </form>
             </div>

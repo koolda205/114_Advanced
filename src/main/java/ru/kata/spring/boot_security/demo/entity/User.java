@@ -31,6 +31,10 @@ public class User implements UserDetails {
 
     private String username;
 
+    private String surname;
+
+    private int age;
+
     @Column
     private String password;
 
@@ -45,10 +49,10 @@ public class User implements UserDetails {
     public User() {
     }
 
-
-
-    public User(String username, String password, String email, Set<Role> roles) {
+    public User(String username, String surname, int age, String password, String email, Set<Role> roles) {
         this.username = username;
+        this.surname = surname;
+        this.age = age;
         this.password = password;
         this.email = email;
         this.roles = roles;
@@ -71,7 +75,6 @@ public class User implements UserDetails {
     }
 
 
-
     public String getPassword() {
         return password;
     }
@@ -79,8 +82,6 @@ public class User implements UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
     public Set<Role> getRoles() {
         return roles;

@@ -63,8 +63,9 @@ function loadTableData(listAllUser) {
             `<tr>
     <td>${user.id}</td>
     <td>${user.username}</td>
+    <td>${user.surname}</td>
+    <td>${user.age}</td>
     <td>${user.email}</td>
-    <td>${user.password}</td>
     <td>${roles}</td>
     <td>
         <button class="btn blue-background" data-bs-toogle="modal"
@@ -103,6 +104,8 @@ async function loadUserTable() {
         `<tr>
     <td>${currentUser.id}</td>
     <td>${currentUser.username}</td>
+    <td>${currentUser.surname}</td>
+    <td>${currentUser.age}</td>
     <td>${currentUser.email}</td>
     <td>${roles}</td>
 </tr>`
@@ -152,6 +155,8 @@ async function addNewUser(event) {
         },
         body: JSON.stringify({
             username: form_new.username.value,
+            surname: form_new.surname.value,
+            age: form_new.age.value,
             email: form_new.email.value,
             password: form_new.password.value,
             roles: listOfRole
@@ -171,6 +176,8 @@ async function addNewUser(event) {
 const form_ed = document.getElementById('formForEditing');
 const id_ed = document.getElementById('id_ed');
 const username_ed = document.getElementById('username_ed');
+const surname_ed = document.getElementById('surname_ed');
+const age_ed = document.getElementById('age_ed');
 const email_ed = document.getElementById('email_ed');
 const password_ed = document.getElementById('password_ed');
 
@@ -183,6 +190,8 @@ async function editModalData(id) {
         await usersPageEd.json().then(user => {
             id_ed.value = `${user.id}`;
             username_ed.value = `${user.username}`;
+            surname_ed.value = `${user.surname}`;
+            age_ed.value = `${user.age}`;
             email_ed.value = `${user.email}`;
             password_ed.value = `${user.password}`;
         })
@@ -208,6 +217,8 @@ async function editUser() {
         body: JSON.stringify({
             id: form_ed.editedUserId.value,
             username: form_new.username.value,
+            surname: form_new.surname.value,
+            age: form_new.age.value,
             email: form_new.email.value,
             password: form_new.password.value,
             roles: listOfRole
@@ -222,8 +233,11 @@ async function editUser() {
 const form_del = document.getElementById('formForDeleting');
 const id_del = document.getElementById('id_del');
 const username_del = document.getElementById('username_del');
+const surname_del = document.getElementById('surname_del');
+const age_del = document.getElementById('age_del');
 const email_del = document.getElementById('email_del');
 const password_del = document.getElementById('password_del');
+const role_del = document.getElementById('role_del');
 
 
 async function deleteModalData(id) {
@@ -234,8 +248,11 @@ async function deleteModalData(id) {
         await usersPageDel.json().then(user => {
             id_del.value = `${user.id}`;
             username_del.value = `${user.username}`;
+            surname_del.value = `${user.surname}`;
+            age_del.value = `${user.age}`;
             email_del.value = `${user.email}`;
             password_del.value = `${user.password}`;
+            role_del.value = `${user.role}`;
         })
     } else {
         alert(`Error, ${usersPageDel.status}`)
@@ -251,8 +268,11 @@ async function deleteUser() {
         },
         body: JSON.stringify({
             username: form_new.username.value,
+            surname: form_new.surname.value,
+            age: form_new.age.value,
             email: form_new.email.value,
             password: form_new.password.value,
+            roles: listOfRole
         })
     }
     await fetch(urlDel, method).then(() => {
