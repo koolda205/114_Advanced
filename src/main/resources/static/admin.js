@@ -180,7 +180,7 @@ const surname_ed = document.getElementById('surname_ed');
 const age_ed = document.getElementById('age_ed');
 const email_ed = document.getElementById('email_ed');
 const password_ed = document.getElementById('password_ed');
-
+// const role_ed = document.getElementById('role_ed');
 
 async function editModalData(id) {
     $('#editModal').modal('show');
@@ -194,6 +194,7 @@ async function editModalData(id) {
             age_ed.value = `${user.age}`;
             email_ed.value = `${user.email}`;
             password_ed.value = `${user.password}`;
+            // role_ed.value = `${user.roles}`;
         })
     } else {
         alert(`Error, ${usersPageEd.status}`)
@@ -203,10 +204,10 @@ async function editModalData(id) {
 async function editUser() {
     let urlEdit = 'http://localhost:8080/admin/users/' + id_ed.value;
     let listOfRole = [];
-    for (let i = 0; i < form_ed.rolesForEditing.options.length; i++) {
-        if (form_ed.rolesForEditing.options[i].selected) {
-            listOfRole.push({id: form_ed.rolesForEditing.options[i].value,
-            name: form_ed.rolesForEditing.options[i].text});
+    for (let i = 0; i < form_ed.roles.options.length; i++) {
+        if (form_ed.roles.options[i].selected) {
+            listOfRole.push({id: form_ed.roles.options[i].value,
+            name: form_ed.roles.options[i].text});
         }
     }
     let method = {
@@ -216,11 +217,11 @@ async function editUser() {
         },
         body: JSON.stringify({
             id: form_ed.editedUserId.value,
-            username: form_new.username.value,
-            surname: form_new.surname.value,
-            age: form_new.age.value,
-            email: form_new.email.value,
-            password: form_new.password.value,
+            username: form_ed.username.value,
+            surname: form_ed.surname.value,
+            age: form_ed.age.value,
+            email: form_ed.email.value,
+            password: form_ed.password.value,
             roles: listOfRole
         })
     }
@@ -237,7 +238,7 @@ const surname_del = document.getElementById('surname_del');
 const age_del = document.getElementById('age_del');
 const email_del = document.getElementById('email_del');
 const password_del = document.getElementById('password_del');
-const role_del = document.getElementById('role_del');
+// const role_del = document.getElementById('role_del');
 
 
 async function deleteModalData(id) {
@@ -252,7 +253,7 @@ async function deleteModalData(id) {
             age_del.value = `${user.age}`;
             email_del.value = `${user.email}`;
             password_del.value = `${user.password}`;
-            role_del.value = `${user.role}`;
+            // role_del.value = `${user.role}`;
         })
     } else {
         alert(`Error, ${usersPageDel.status}`)
@@ -261,6 +262,13 @@ async function deleteModalData(id) {
 
 async function deleteUser() {
     let urlDel = 'http://localhost:8080/admin/users/' + id_del.value;
+    let listOfRole = [];
+    for (let i = 0; i < form_ed.roles.options.length; i++) {
+        if (form_ed.roles.options[i].selected) {
+            listOfRole.push({id: form_ed.roles.options[i].value,
+                name: form_ed.roles.options[i].text});
+        }
+    }
     let method = {
         method: 'DELETE',
         headers: {
@@ -272,7 +280,7 @@ async function deleteUser() {
             age: form_del.age.value,
             email: form_del.email.value,
             password: form_del.password.value,
-            roles: form_del.role.value
+            roles: listOfRole
         })
     }
     await fetch(urlDel, method).then(() => {
