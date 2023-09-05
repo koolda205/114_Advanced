@@ -1,5 +1,6 @@
+"use strict";
 
-const url = "http://localhost:8080/api/users/"
+const url = "http://localhost:8080/admin/users"
 
 async function getAdminPage() {
     let page = await fetch(url);
@@ -33,7 +34,7 @@ async function activePillContent(tabId) {
 }
 
 async function getMyUser() {
-    let res = await fetch("http://localhost:8080/api/auth");
+    let res = await fetch('/api/auth');
     let resUser = await res.json();
     userNavbarDetails(resUser);
 }
@@ -47,7 +48,7 @@ function userNavbarDetails(resUser) {
         roles += role.name + ' '
     }
     userList.insertAdjacentHTML('beforeend', `
-        <b> ${resUser.email} </b> with roles: <a>${roles} </a>`);
+        <b> ${resUser.username} </b> with roles: <a>${roles} </a>`);
 }
 
 function loadTableData(listAllUser) {
@@ -61,10 +62,9 @@ function loadTableData(listAllUser) {
         dataHtml +=
             `<tr>
     <td>${user.id}</td>
-    <td>${user.name}</td>
-    <td>${user.surname}</td>
-    <td>${user.age}</td>
+    <td>${user.username}</td>
     <td>${user.email}</td>
+    <td>${user.password}</td>
     <td>${roles}</td>
     <td>
         <button class="btn blue-background" data-bs-toogle="modal"
@@ -83,11 +83,11 @@ function loadTableData(listAllUser) {
 
 getAdminPage();
 
-window.addEventListener('DOMContentLoaded', loadUserTable);
+
 
 async function loadUserTable() {
     let tableBody = document.getElementById('tableUser');
-    let page = await fetch("http://localhost:8080/api/auth");
+    let page = await fetch("/api/auth");
     let currentUser;
     if (page.ok) {
         currentUser = await page.json();
@@ -102,9 +102,7 @@ async function loadUserTable() {
     dataHtml +=
         `<tr>
     <td>${currentUser.id}</td>
-    <td>${currentUser.name}</td>
-    <td>${currentUser.surname}</td>
-    <td>${currentUser.age}</td>
+    <td>${currentUser.username}</td>
     <td>${currentUser.email}</td>
     <td>${roles}</td>
 </tr>`
@@ -144,7 +142,7 @@ async function addNewUser(event) {
     for (let i = 0; i < form_new.roleSelect.options.length; i++) {
         if (form_new.roleSelect.options[i].selected) {
             listOfRole.push({id: form_new.roleSelect.options[i].value,
-                role: form_new.roleSelect.options[i].text});
+            role: form_new.roleSelect.options[i].text});
         }
     }
     let method = {
@@ -153,9 +151,7 @@ async function addNewUser(event) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name: form_new.name.value,
-            surname: form_new.surname.value,
-            age: form_new.age.value,
+            username: form_new.username.value,
             email: form_new.email.value,
             password: form_new.password.value,
             roles: listOfRole
@@ -172,27 +168,21 @@ async function addNewUser(event) {
     });
 }
 
-
 const form_ed = document.getElementById('formForEditing');
 const id_ed = document.getElementById('id_ed');
-const name_ed = document.getElementById('name_ed');
-const surname_ed = document.getElementById('surname_ed');
-const age_ed = document.getElementById('age_ed');
+const username_ed = document.getElementById('username_ed');
 const email_ed = document.getElementById('email_ed');
 const password_ed = document.getElementById('password_ed');
 
 
-
 async function editModalData(id) {
     $('#editModal').modal('show');
-    const urlDataEd = url + id;
+    const urlDataEd = 'http://localhost:8080/admin/users/' + id;
     let usersPageEd = await fetch(urlDataEd);
     if (usersPageEd.ok) {
         await usersPageEd.json().then(user => {
             id_ed.value = `${user.id}`;
-            name_ed.value = `${user.name}`;
-            surname_ed.value = `${user.surname}`;
-            age_ed.value = `${user.age}`;
+            username_ed.value = `${user.username}`;
             email_ed.value = `${user.email}`;
             password_ed.value = `${user.password}`;
         })
@@ -202,12 +192,12 @@ async function editModalData(id) {
 }
 
 async function editUser() {
-    let urlEdit = url + id_ed.value;
+    let urlEdit = 'http://localhost:8080/admin/users/' + id_ed.value;
     let listOfRole = [];
     for (let i = 0; i < form_ed.rolesForEditing.options.length; i++) {
         if (form_ed.rolesForEditing.options[i].selected) {
             listOfRole.push({id: form_ed.rolesForEditing.options[i].value,
-                name: form_ed.rolesForEditing.options[i].text});
+            name: form_ed.rolesForEditing.options[i].text});
         }
     }
     let method = {
@@ -217,11 +207,9 @@ async function editUser() {
         },
         body: JSON.stringify({
             id: form_ed.editedUserId.value,
-            name: form_ed.name.value,
-            surname: form_ed.surname.value,
-            age: form_ed.age.value,
-            email: form_ed.email.value,
-            password: form_ed.password.value,
+            username: form_new.username.value,
+            email: form_new.email.value,
+            password: form_new.password.value,
             roles: listOfRole
         })
     }
@@ -233,23 +221,21 @@ async function editUser() {
 
 const form_del = document.getElementById('formForDeleting');
 const id_del = document.getElementById('id_del');
-const name_del = document.getElementById(`name_del`);
-const surname_del = document.getElementById('surname_del');
-const age_del = document.getElementById('age_del');
+const username_del = document.getElementById('username_del');
 const email_del = document.getElementById('email_del');
+const password_del = document.getElementById('password_del');
 
 
 async function deleteModalData(id) {
     $('#deleteModal').modal('show');
-    const urlForDel = url + id;
+    const urlForDel = 'http://localhost:8080/admin/users/' + id;
     let usersPageDel = await fetch(urlForDel);
     if (usersPageDel.ok) {
         await usersPageDel.json().then(user => {
             id_del.value = `${user.id}`;
-            name_del.value = `${user.name}`;
-            surname_del.value = `${user.surname}`;
-            age_del.value = `${user.age}`;
+            username_del.value = `${user.username}`;
             email_del.value = `${user.email}`;
+            password_del.value = `${user.password}`;
         })
     } else {
         alert(`Error, ${usersPageDel.status}`)
@@ -257,17 +243,16 @@ async function deleteModalData(id) {
 }
 
 async function deleteUser() {
-    let urlDel = url + id_del.value;
+    let urlDel = 'http://localhost:8080/admin/users/' + id_del.value;
     let method = {
         method: 'DELETE',
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            name: form_del.name.value,
-            surname: form_del.surname.value,
-            age: form_del.age.value,
-            email: form_del.email.value,
+            username: form_new.username.value,
+            email: form_new.email.value,
+            password: form_new.password.value,
         })
     }
     await fetch(urlDel, method).then(() => {
@@ -275,3 +260,6 @@ async function deleteUser() {
         getAdminPage();
     })
 }
+
+
+
