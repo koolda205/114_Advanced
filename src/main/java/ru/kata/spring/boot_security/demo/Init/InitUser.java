@@ -25,8 +25,8 @@ public class InitUser {
 
     @PostConstruct
     private void dataBaseInit() throws Exception {
-        Role roleAdmin = new Role("ADMIN");
-        Role roleUser = new Role("USER");
+        Role roleAdmin = new Role((long)1,"ADMIN");
+        Role roleUser = new Role((long)2,"USER");
         Set<Role> adminSet = new HashSet<>();
         Set<Role> userSet = new HashSet<>();
 
