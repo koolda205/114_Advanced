@@ -144,8 +144,8 @@ async function addNewUser(event) {
     let listOfRole = [];
     for (let i = 0; i < form_new.roleSelect.options.length; i++) {
         if (form_new.roleSelect.options[i].selected) {
-            listOfRole.push({id: form_new.roleSelect.options[i].value,
-            role: form_new.roleSelect.options[i].text});
+            listOfRole.push({id: form_new.roles.options[i].value,
+            role: form_new.roles.options[i].text});
         }
     }
     let method = {
