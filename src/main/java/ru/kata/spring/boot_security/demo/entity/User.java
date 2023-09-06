@@ -119,6 +119,17 @@ public class User implements UserDetails {
         this.email = email;
     }
 
+    public String getRolesToString() {
+        StringBuilder sb = new StringBuilder();
+        for (Role role : roles) {
+            sb.append(role);
+            sb.append(" ");
+        }
+        return sb.toString();
+    }
+    public String roleToString() {
+        return roles.stream().map(Object::toString).collect(Collectors.joining(", "));
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
