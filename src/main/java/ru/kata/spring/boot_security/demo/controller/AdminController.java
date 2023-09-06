@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.kata.spring.boot_security.demo.dto.UserDto;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -40,8 +39,8 @@ public class AdminController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<HttpStatus> addUser(@RequestBody UserDto userDto) {
-        userService.addUser(userService.convertToUser(userDto));
+    public ResponseEntity<HttpStatus> addUser(@RequestBody User user) {
+        userService.addUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
