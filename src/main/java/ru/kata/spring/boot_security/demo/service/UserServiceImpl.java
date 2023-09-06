@@ -30,11 +30,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) {
-        User user = userRepository.findByEmail(name);
-        if (user == null) {
+        Optional<User> user = userRepository.findByEmail(name);
+        if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found");
         }
-        return user;
+        return user.get();
     }
 
     @Override
