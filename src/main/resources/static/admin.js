@@ -1,6 +1,6 @@
 "use strict";
 
-const url = "http://localhost:8080/admin/users"
+const url = "http://localhost:8080/api/users"
 
 async function getAdminPage() {
     let page = await fetch(url);
@@ -184,7 +184,7 @@ const password_ed = document.getElementById('password_ed');
 
 async function editModalData(id) {
     $('#editModal').modal('show');
-    const urlDataEd = 'http://localhost:8080/admin/users/' + id;
+    const urlDataEd = url + id;
     let usersPageEd = await fetch(urlDataEd);
     if (usersPageEd.ok) {
         await usersPageEd.json().then(user => {
@@ -194,7 +194,6 @@ async function editModalData(id) {
             age_ed.value = `${user.age}`;
             email_ed.value = `${user.email}`;
             password_ed.value = `${user.password}`;
-            // role_ed.value = `${user.roles}`;
         })
     } else {
         alert(`Error, ${usersPageEd.status}`)
@@ -202,7 +201,7 @@ async function editModalData(id) {
 }
 
 async function editUser() {
-    let urlEdit = 'http://localhost:8080/admin/users/' + id_ed.value;
+    let urlEdit = url + id_ed.value;
     let listOfRole = [];
     for (let i = 0; i < form_ed.roles.options.length; i++) {
         if (form_ed.roles.options[i].selected) {
@@ -238,12 +237,10 @@ const surname_del = document.getElementById('surname_del');
 const age_del = document.getElementById('age_del');
 const email_del = document.getElementById('email_del');
 const password_del = document.getElementById('password_del');
-// const role_del = document.getElementById('role_del');
-
 
 async function deleteModalData(id) {
     $('#deleteModal').modal('show');
-    const urlForDel = 'http://localhost:8080/admin/users/' + id;
+    const urlForDel = url + id;
     let usersPageDel = await fetch(urlForDel);
     if (usersPageDel.ok) {
         await usersPageDel.json().then(user => {
@@ -252,8 +249,6 @@ async function deleteModalData(id) {
             surname_del.value = `${user.surname}`;
             age_del.value = `${user.age}`;
             email_del.value = `${user.email}`;
-            password_del.value = `${user.password}`;
-            // role_del.value = `${user.role}`;
         })
     } else {
         alert(`Error, ${usersPageDel.status}`)
@@ -261,7 +256,7 @@ async function deleteModalData(id) {
 }
 
 async function deleteUser() {
-    let urlDel = 'http://localhost:8080/admin/users/' + id_del.value;
+    let urlDel = url + id_del.value;
     let listOfRole = [];
     for (let i = 0; i < form_ed.roles.options.length; i++) {
         if (form_ed.roles.options[i].selected) {
@@ -279,7 +274,6 @@ async function deleteUser() {
             surname: form_del.surname.value,
             age: form_del.age.value,
             email: form_del.email.value,
-            password: form_del.password.value,
             roles: listOfRole
         })
     }

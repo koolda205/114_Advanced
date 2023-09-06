@@ -20,9 +20,5 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(path = "/api/auth", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Optional<User>> getAuthUser(@CurrentSecurityContext(expression = "authentication") Principal principal) {
-        Optional<User> user = userService.findByUsername(principal.getName());
-        return ResponseEntity.ok(user);
-    }
+
 }
