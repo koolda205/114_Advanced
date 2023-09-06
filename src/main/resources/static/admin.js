@@ -237,7 +237,6 @@ const surname_del = document.getElementById('surname_del');
 const age_del = document.getElementById('age_del');
 const email_del = document.getElementById('email_del');
 
-
 async function deleteModalData(id) {
     $('#deleteModal').modal('show');
     const urlForDel = url + id;
