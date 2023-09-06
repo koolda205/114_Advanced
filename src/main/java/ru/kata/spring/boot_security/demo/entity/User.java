@@ -119,15 +119,6 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public String getRolesToString() {
-        StringBuilder sb = new StringBuilder();
-        for (Role role : roles) {
-            sb.append(role);
-            sb.append(" ");
-        }
-        return sb.toString();
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
