@@ -23,6 +23,7 @@ import java.util.Set;
 @Table(name = "users")
 @JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class User implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -58,7 +59,6 @@ public class User implements UserDetails {
         this.email = email;
         this.roles = roles;
     }
-
 
     public Long getId() {
         return id;
@@ -116,15 +116,6 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-
-    public String getRolesToString() {
-        StringBuilder sb = new StringBuilder();
-        for (Role role : roles) {
-            sb.append(role);
-            sb.append(" ");
-        }
-        return sb.toString();
-    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
