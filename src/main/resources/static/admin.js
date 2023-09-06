@@ -48,7 +48,7 @@ function userNavbarDetails(resUser) {
         roles += role.name + ' '
     }
     userList.insertAdjacentHTML('beforeend', `
-        <b> ${resUser.username} </b> with roles: <a>${roles} </a>`);
+        <b> ${resUser.email} </b> with roles: <a>${roles} </a>`);
 }
 
 function loadTableData(listAllUser) {

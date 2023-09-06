@@ -13,7 +13,7 @@ async function getMyUser() {
             roles += role.name + ' '
         }
         userList.insertAdjacentHTML('beforeend', `
-        <b> ${resUser.username} </b> with roles: <a>${roles} </a>`);
+        <b> ${resUser.email} </b> with roles: <a>${roles} </a>`);
 
     }
 window.addEventListener('DOMContentLoaded', loadUserTable);
