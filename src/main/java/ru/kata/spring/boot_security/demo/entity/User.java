@@ -84,9 +84,7 @@ public class User implements UserDetails {
 
     public void setSurname(String surname) {
         this.surname = surname;
-
     }
-
 
     public int getAge() {
         return age;
@@ -94,6 +92,14 @@ public class User implements UserDetails {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -111,13 +117,7 @@ public class User implements UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getRolesToString() {
         StringBuilder sb = new StringBuilder();
@@ -127,13 +127,13 @@ public class User implements UserDetails {
         }
         return sb.toString();
     }
-    public String roleToString() {
-        return roles.stream().map(Object::toString).collect(Collectors.joining(", "));
-    }
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getRoles();
-    }
+//    public String roleToString() {
+//        return roles.stream().map(Object::toString).collect(Collectors.joining(", "));
+//    }
+//    @Override
+//    public Collection<? extends GrantedAuthority> getAuthorities() {
+//        return getRoles();
+//    }
 
     @Override
     public boolean isAccountNonExpired() {
