@@ -1,7 +1,6 @@
 package ru.kata.spring.boot_security.demo.entity;
 
 import com.sun.istack.NotNull;
-import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
@@ -57,15 +56,5 @@ public class Role implements GrantedAuthority {
         if (o == null || getClass() != o.getClass()) return false;
         Role role = (Role) o;
         return Objects.equals(name, role.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name);
-    }
-
-    @Override
-    public String toString() {
-        return name;
     }
 }
