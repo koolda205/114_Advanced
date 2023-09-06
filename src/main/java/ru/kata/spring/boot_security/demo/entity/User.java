@@ -58,6 +58,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+
     public Long getId() {
         return id;
     }
@@ -80,7 +81,9 @@ public class User implements UserDetails {
 
     public void setSurname(String surname) {
         this.surname = surname;
+
     }
+
 
     public int getAge() {
         return age;
