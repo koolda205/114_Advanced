@@ -127,9 +127,6 @@ public class User implements UserDetails {
         }
         return sb.toString();
     }
-    public String roleToString() {
-        return roles.stream().map(Object::toString).collect(Collectors.joining(", "));
-    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
