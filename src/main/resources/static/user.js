@@ -10,7 +10,7 @@ async function getMyUser() {
         let userList = document.getElementById('myUserDetails');
         let roles = ''
         for (let role of resUser.roles) {
-            roles += role.name + ' '
+            roles += role.userRole + ' '
         }
         userList.insertAdjacentHTML('beforeend', `
         <b> ${resUser.email} </b> with roles: <a>${roles} </a>`);
@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', loadUserTable);
         let dataHtml = '';
         let roles = [];
         for (let role of currentUser.roles) {
-            roles.push(" " + role.name)
+            roles.push(" " + role.userRole)
         }
         dataHtml +=
             `<tr>

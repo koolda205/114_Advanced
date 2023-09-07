@@ -45,7 +45,7 @@ function userNavbarDetails(resUser) {
     let userList = document.getElementById('myUserDetails');
     let roles = ''
     for (let role of resUser.roles) {
-        roles += role.name + ' '
+        roles += role.userRole + ' '
     }
     userList.insertAdjacentHTML('beforeend', `
         <b> ${resUser.email} </b> with roles: <a>${roles} </a>`);
@@ -57,7 +57,7 @@ function loadTableData(listAllUser) {
     for (let user of listAllUser) {
         let roles = [];
         for (let role of user.roles) {
-            roles.push(" " + role.name)
+            roles.push(" " + role.userRole)
         }
         dataHtml +=
             `<tr>
@@ -98,7 +98,7 @@ async function loadUserTable() {
     let dataHtml = '';
     let roles = [];
     for (let role of currentUser.roles) {
-        roles.push(" " + role.name)
+        roles.push(" " + role.userRole)
     }
     dataHtml +=
         `<tr>
@@ -206,7 +206,7 @@ async function editUser() {
     for (let i = 0; i < form_ed.roles.options.length; i++) {
         if (form_ed.roles.options[i].selected) {
             listOfRole.push({id: form_ed.roles.options[i].value,
-            name: form_ed.roles.options[i].text});
+                userRole: form_ed.roles.options[i].text});
         }
     }
     let method = {
@@ -260,7 +260,7 @@ async function deleteUser() {
     for (let i = 0; i < form_ed.roles.options.length; i++) {
         if (form_ed.roles.options[i].selected) {
             listOfRole.push({id: form_ed.roles.options[i].value,
-                name: form_ed.roles.options[i].text});
+                userRole: form_ed.roles.options[i].text});
         }
     }
     let method = {
