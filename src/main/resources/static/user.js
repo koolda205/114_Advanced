@@ -34,7 +34,7 @@ window.addEventListener('DOMContentLoaded', loadUserTable);
         dataHtml +=
             `<tr>
     <td>${currentUser.id}</td>
-    <td>${currentUser.username}</td>
+    <td>${currentUser.name}</td>
     <td>${currentUser.surname}</td>
     <td>${currentUser.age}</td>
     <td>${currentUser.email}</td>

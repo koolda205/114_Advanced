@@ -16,6 +16,6 @@ public interface UserService {
 
     void updateUser(User user);
 
-    Optional<User> findByUsername(String username);
+    Optional<User> findByName(String username);
 
 }

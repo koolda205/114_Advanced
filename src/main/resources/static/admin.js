@@ -62,7 +62,7 @@ function loadTableData(listAllUser) {
         dataHtml +=
             `<tr>
     <td>${user.id}</td>
-    <td>${user.username}</td>
+    <td>${user.name}</td>
     <td>${user.surname}</td>
     <td>${user.age}</td>
     <td>${user.email}</td>
@@ -103,7 +103,7 @@ async function loadUserTable() {
     dataHtml +=
         `<tr>
     <td>${currentUser.id}</td>
-    <td>${currentUser.username}</td>
+    <td>${currentUser.name}</td>
     <td>${currentUser.surname}</td>
     <td>${currentUser.age}</td>
     <td>${currentUser.email}</td>
@@ -154,7 +154,7 @@ async function addNewUser(event) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            username: form_new.username.value,
+            name: form_new.name.value,
             surname: form_new.surname.value,
             age: form_new.age.value,
             email: form_new.email.value,
@@ -175,7 +175,7 @@ async function addNewUser(event) {
 
 const form_ed = document.getElementById('formForEditing');
 const id_ed = document.getElementById('id_ed');
-const username_ed = document.getElementById('username_ed');
+const name_ed = document.getElementById('name_ed');
 const surname_ed = document.getElementById('surname_ed');
 const age_ed = document.getElementById('age_ed');
 const email_ed = document.getElementById('email_ed');
@@ -189,7 +189,7 @@ async function editModalData(id) {
     if (usersPageEd.ok) {
         await usersPageEd.json().then(user => {
             id_ed.value = `${user.id}`;
-            username_ed.value = `${user.username}`;
+            name_ed.value = `${user.name}`;
             surname_ed.value = `${user.surname}`;
             age_ed.value = `${user.age}`;
             email_ed.value = `${user.email}`;
@@ -216,7 +216,7 @@ async function editUser() {
         },
         body: JSON.stringify({
             id: form_ed.editedUserId.value,
-            username: form_ed.username.value,
+            name: form_ed.name.value,
             surname: form_ed.surname.value,
             age: form_ed.age.value,
             email: form_ed.email.value,
@@ -232,7 +232,7 @@ async function editUser() {
 
 const form_del = document.getElementById('formForDeleting');
 const id_del = document.getElementById('id_del');
-const username_del = document.getElementById('username_del');
+const name_del = document.getElementById('name_del');
 const surname_del = document.getElementById('surname_del');
 const age_del = document.getElementById('age_del');
 const email_del = document.getElementById('email_del');
@@ -244,7 +244,7 @@ async function deleteModalData(id) {
     if (usersPageDel.ok) {
         await usersPageDel.json().then(user => {
             id_del.value = `${user.id}`;
-            username_del.value = `${user.username}`;
+            name_del.value = `${user.name}`;
             surname_del.value = `${user.surname}`;
             age_del.value = `${user.age}`;
             email_del.value = `${user.email}`;
@@ -269,7 +269,7 @@ async function deleteUser() {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            username: form_del.username.value,
+            name: form_del.name.value,
             surname: form_del.surname.value,
             age: form_del.age.value,
             email: form_del.email.value,

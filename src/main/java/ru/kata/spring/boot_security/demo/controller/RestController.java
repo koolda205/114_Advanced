@@ -62,7 +62,7 @@ public class RestController {
 
     @GetMapping(path = "/auth", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Optional<User>> getAuthUser(@CurrentSecurityContext(expression = "authentication") Principal principal) {
-        Optional<User> user = userService.findByUsername(principal.getName());
+        Optional<User> user = userService.findByName(principal.getName());
         return ResponseEntity.ok(user);
     }
 }
