@@ -2,6 +2,7 @@ package ru.kata.spring.boot_security.demo.service;
 
 
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,9 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void updateUser(User user) {
         Optional<User> userFromDB = userRepository.findById(user.getId());
+        if (userFromDB.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
         String newPassword = user.getPassword();
         String currentPassword = userFromDB.get().getPassword();
 
