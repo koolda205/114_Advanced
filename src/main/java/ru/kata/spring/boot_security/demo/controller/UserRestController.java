@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.kata.spring.boot_security.demo.entity.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
@@ -19,7 +20,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/api")
 @CrossOrigin
 public class UserRestController {
