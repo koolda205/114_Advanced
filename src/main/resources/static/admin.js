@@ -1,5 +1,5 @@
 
-const url = "http://localhost:8081/api/users/"
+const url = "http://localhost:8080/api/users/"
 
 async function getAdminPage() {
     let page = await fetch(url);
