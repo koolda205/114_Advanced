@@ -22,11 +22,11 @@ import java.util.Optional;
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
 @CrossOrigin
-public class RestController {
+public class UserRestController {
 
     private final UserService userService;
 
-    public RestController(UserService userService) {
+    public UserRestController(UserService userService) {
         this.userService = userService;
     }
 
