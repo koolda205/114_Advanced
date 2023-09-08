@@ -28,6 +28,7 @@ public class DbInit {
         User user = new User( "user", "user", 22, "user" , "user@mail.ru", Set.of(roleUser));
         User admin = new User( "admin","admin", 33, "123","admin@mail.ru",  Set.of(roleAdmin, roleUser));
         User ad = new User( "ad","ad", 44, "ad", "ad@ad.ad",  Set.of(roleAdmin, roleUser));
+
         userService.addUser(user);
         userService.addUser(admin);
         userService.addUser(ad);
